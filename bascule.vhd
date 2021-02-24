@@ -2,9 +2,9 @@
 -- Company:
 -- Engineer: Benjamin CHOLLET
 --
--- Create Date: 24.02.2021 11:02:55
+-- Create Date: 24.02.2021 10:18:53
 -- Design Name:
--- Module Name: ual - Behavioral
+-- Module Name: bascule - Behavioral
 -- Project Name:
 -- Target Devices:
 -- Tool Versions:
@@ -21,42 +21,47 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---
+--use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ual is
+entity bascule is
   Port (
-    opA     : in  std_logic_vector ( 7 downto 0);
-    opB     : in  std_logic_vector ( 7 downto 0);
-    sel_ual : in  std_logic;
-    carry   : out std_logic;
-    S_accu  : out std_logic_vector ( 7 downto 0)
-     );
-end ual;
+    clk        : in  std_logic;
+    rst        : in  std_logic;
+    ce         : in  std_logic;
+    load_carry : in  std_logic;
+    init_carry : in  std_logic;
+    entree     : in  std_logic;
+    sortie     : out std_logic
+  );
+end bascule;
 
-architecture Behavioral of ual is
-
-signal result : std_logic_vector ( 8 downto 0);
+architecture Behavioral of bascule is
 
 begin
 
-cal : process (opA, opB, sel_ual) is
-begin
-    if sel_ual = '1' then
-        result <= std_logic_vector(resize(unsigned(opA),9) + resize(unsigned(opB),9));
-    else
-        result(7 downto 0) <= opA nor opB;
+ sync : process (clk, rst) is
+
+ begin
+
+     if rst = '1' then -- remise à zéro
+       sortie <= '0';
+
+     elsif clk'event and clk = '1' then
+        if ce ='1' then
+          if init
+          elsif load_reg = '1' then
+                sortie <= entree;
+             end if;
+        end if;
      end if;
-end process cal;
+ end process sync;
 
-S_accu <= result(7 downto 0);
-carry  <= result(8);
 end Behavioral;

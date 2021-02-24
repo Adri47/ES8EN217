@@ -1,9 +1,30 @@
+----------------------------------------------------------------------------------
+-- Company:
+-- Engineer: Benjamin CHOLLET
+--
+-- Create Date: 24.02.2021 11:02:55
+-- Design Name:
+-- Module Name: ual - Behavioral
+-- Project Name:
+-- Target Devices:
+-- Tool Versions:
+-- Description:
+--
+-- Dependencies:
+--
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+--
+----------------------------------------------------------------------------------
+
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity compteur is
-  
+
   port (
     clk        : in  std_logic;
     rst        : in  std_logic;
@@ -24,23 +45,23 @@ architecture RTL of compteur is
 begin  -- architecture RTL
 
   sync : process (clk, rst) is
- 
+
   begin
 
-    if rst = '1' then -- remise à zéros
+    if rst = '1' then -- remise Ã  zÃ©ros
       compteur <= x"00";
-      
-    elsif clk'event and clk = '1' then 
+
+    elsif clk'event and clk = '1' then
 	   if ce ='1' then
 	       if init_cpt = '1' then
 	           compteur <= x"00";
 	       elsif load = '1' then
                  compteur <= entree_load;
-            elsif enable_cpt = '1' then 
+            elsif enable_cpt = '1' then
 	           compteur <= std_logic_vector(unsigned(compteur) + 1); -- compteur
 	       end if;
         end if;
     end if;
-  end process sync; 
+  end process sync;
    adresse <= compteur;
 end architecture RTL;

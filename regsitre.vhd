@@ -1,21 +1,21 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
+-- Company:
+-- Engineer: Benjamin CHOLLET
+--
 -- Create Date: 24.02.2021 10:18:53
--- Design Name: 
+-- Design Name:
 -- Module Name: regsitre - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
+-- Project Name:
+-- Target Devices:
+-- Tool Versions:
+-- Description:
+--
+-- Dependencies:
+--
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
--- 
+--
 ----------------------------------------------------------------------------------
 
 
@@ -32,13 +32,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity regsitre is
-  Port (     
+  Port (
     clk        : in  std_logic;
     rst        : in  std_logic;
     ce         : in  std_logic;
     load_reg   : in  std_logic;
     entree     : in  std_logic_vector (7 downto 0);
-    sortie     : out  std_logic_vector (7 downto 0)
+    sortie     : out std_logic_vector (7 downto 0)
   );
 end regsitre;
 
@@ -47,13 +47,13 @@ architecture Behavioral of regsitre is
 begin
 
  sync : process (clk, rst) is
- 
- begin 
- 
-     if rst = '1' then -- remise à zéros
+
+ begin
+
+     if rst = '1' then -- remise ï¿½ zï¿½ros
        sortie <= x"00";
-       
-     elsif clk'event and clk = '1' then 
+
+     elsif clk'event and clk = '1' then
         if ce ='1' then
             if load_reg = '1' then
                 sortie <= entree;
