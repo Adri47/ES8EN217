@@ -7,10 +7,11 @@ entity compteur is
   port (
     clk        : in  std_logic;
     rst        : in  std_logic;
-    load       : in  std_logic_vector (7 downto 0);
+    load       : in  std_logic;
     enable_cpt : in  std_logic;
     init_cpt   : in  std_logic;
     ce         : in  std_logic;
+    entree_load: in  std_logic_vector (7 downto 0);
     adresse    : out std_logic_vector (7 downto 0)
     );
 
@@ -33,10 +34,10 @@ begin  -- architecture RTL
 	   if ce ='1' then
 	       if init_cpt = '1' then
 	           compteur <= x"00";
+	       elsif load = '1' then
+                 compteur <= entree_load;
             elsif enable_cpt = '1' then 
 	           compteur <= std_logic_vector(unsigned(compteur) + 1); -- compteur
-	       elsif enable_cpt = '0' then
-	           compteur <= load;
 	       end if;
         end if;
     end if;
