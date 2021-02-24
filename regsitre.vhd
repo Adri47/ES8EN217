@@ -36,6 +36,7 @@ entity regsitre is
     clk        : in  std_logic;
     rst        : in  std_logic;
     ce         : in  std_logic;
+    load_reg   : in  std_logic;
     entree     : in  std_logic_vector (7 downto 0);
     sortie     : out  std_logic_vector (7 downto 0)
   );
@@ -54,7 +55,9 @@ begin
        
      elsif clk'event and clk = '1' then 
         if ce ='1' then
-            sortie <= entree;
+            if load_reg = '1' then
+                sortie <= entree;
+             end if;
         end if;
      end if;
  end process sync;
