@@ -11,19 +11,19 @@ entity compteur is
     enable_cpt : in  std_logic;
     init_cpt   : in  std_logic;
     ce         : in  std_logic;
-    entree_load: in  std_logic_vector (7 downto 0);
-    adresse    : out std_logic_vector (7 downto 0)
+    entree_load: in  std_logic_vector (5 downto 0);
+    adresse    : out std_logic_vector (5 downto 0)
     );
 
 end entity compteur;
 
 architecture RTL of compteur is
 
- signal compteur : std_logic_vector (7 downto 0);
+ signal compteur : std_logic_vector (5 downto 0);
 
 begin  -- architecture RTL
 
-  sync : process (clk, rst,ce) is
+  sync : process (clk, rst) is
  
   begin
 
