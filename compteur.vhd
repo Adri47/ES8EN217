@@ -49,12 +49,12 @@ begin  -- architecture RTL
   begin
 
     if rst = '1' then -- remise à zéros
-      compteur <= x"00";
+      compteur <= "000000";
 
     elsif clk'event and clk = '1' then
 	   if ce ='1' then
 	       if init_cpt = '1' then
-	           compteur <= x"00";
+	           compteur <= "000000";
 	       elsif load = '1' then
                  compteur <= entree_load;
             elsif enable_cpt = '1' then

@@ -40,10 +40,11 @@ entity unite_de_traitement is
      );
 end unite_de_traitement;
 
-  signal reg_data_out, reg_accu_out, out_ual_data : std_logic_vector(7 downto 0);
-  signal out_ual_carry : std_logic;
 
 architecture Behavioral of unite_de_traitement is
+
+  signal reg_data_out, reg_accu_out, out_ual_data : std_logic_vector(7 downto 0);
+  signal out_ual_carry : std_logic;
 
   component registre
     Port (
@@ -80,7 +81,7 @@ architecture Behavioral of unite_de_traitement is
 
   begin
 -- port map : signal_composant => signal du top
-  registre_accu : regsitre
+  registre_accu : registre
     port map (
       clk      => clk,
       rst      => rst,
@@ -90,7 +91,7 @@ architecture Behavioral of unite_de_traitement is
       sortie   => reg_accu_out
     );
 
-    registre_data : regsitre
+    registre_data : registre
       port map (
         clk      => clk,
         rst      => rst,
@@ -100,18 +101,18 @@ architecture Behavioral of unite_de_traitement is
         sortie   => reg_data_out
       );
 
-      bascule_carry : bascule_carry
+      bascule_carry : bascule
         port map (
           clk        => clk,
           rst        => rst,
           ce         => ce,
           load_carry => load_carry,
-          init_carry => init_cpt,
+          init_carry => init_carry,
           entree     => out_ual_carry,
           sortie     => carry
         );
 
-        UAL : ual
+        unite_de_calcul : ual
           port map(
             opA     => reg_data_out,
             opB     => reg_accu_out,

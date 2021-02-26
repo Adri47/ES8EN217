@@ -4,7 +4,7 @@
 --
 -- Create Date: 24.02.2021 10:18:53
 -- Design Name:
--- Module Name: bascule - Behavioral
+-- Module Name: regsitre - Behavioral
 -- Project Name:
 -- Target Devices:
 -- Tool Versions:
@@ -31,19 +31,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity bascule is
+entity registre is
   Port (
     clk        : in  std_logic;
     rst        : in  std_logic;
     ce         : in  std_logic;
-    load_carry : in  std_logic;
-    init_carry : in  std_logic;
-    entree     : in  std_logic;
-    sortie     : out std_logic
+    load_reg   : in  std_logic;
+    entree     : in  std_logic_vector (7 downto 0);
+    sortie     : out std_logic_vector (7 downto 0)
   );
-end bascule;
+end registre;
 
-architecture Behavioral of bascule is
+architecture Behavioral of registre is
 
 begin
 
@@ -51,16 +50,14 @@ begin
 
  begin
 
-     if rst = '1' then -- remise à zéro
-       sortie <= '0';
+     if rst = '1' then -- remise � z�ros
+       sortie <= x"00";
 
      elsif clk'event and clk = '1' then
         if ce ='1' then
-          if init_carry = '0' then 
-            sortie <= '0';
-          elsif load_carry = '1'then
-            sortie <= entree;
-          end if;
+            if load_reg = '1' then
+                sortie <= entree;
+             end if;
         end if;
      end if;
  end process sync;
