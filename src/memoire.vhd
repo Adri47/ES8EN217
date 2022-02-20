@@ -16,8 +16,11 @@ end memoire;
 architecture Behavioral of memoire is
 
 TYPE RAM IS ARRAY (0 to 63) OF std_logic_vector (7 downto 0); -- un tableau (RAM) de 64 cases contenant des données 8 bits 
-signal mem:RAM := (X"08",X"47",X"86",X"C4",X"C4",X"00",X"00",X"7E",X"FE",others=>"00000000"); 
-
+--signal mem:RAM := (X"08",X"47",X"86",X"C4",X"C4",X"00",X"00",X"7E",X"FE",others=>"00000000"); 
+signal mem:RAM := (X"11",X"15",X"52",X"54",X"C9",X"94",X"51",X"CD",X"C0",
+                   X"13",X"52",X"95",X"C0",X"CD",X"CD",X"CD",X"CD",X"FF",
+                   X"01",X"00",X"28",X"18" 
+                   ,others=>"00000000"); 
 begin
 
     process (clk)

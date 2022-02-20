@@ -52,9 +52,15 @@ cal : process (opA, opB, sel_ual) is
 begin
     if sel_ual = '1' then
         result <= std_logic_vector(resize(unsigned(opA),9) + resize(unsigned(opB),9));
+       -- carry  <= result(8);
     else
         result(7 downto 0) <= opA nor opB;
+       -- carry <= '0';
+       result(8) <= '0';
      end if;
+     
+S_accu <= result(7 downto 0);
+
 end process cal;
 
 S_accu <= result(7 downto 0);

@@ -32,11 +32,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity processeur_8bits is
-    Port ( clk : in STD_LOGIC;
+    Port ( clk  : in STD_LOGIC;
            ce : in STD_LOGIC;
            rst : in STD_LOGIC;
            data_out : out STD_LOGIC_VECTOR (7 downto 0);
-           data_in : out STD_LOGIC_VECTOR (7 downto 0));
+           data_in  : out STD_LOGIC_VECTOR (7 downto 0);
+           address : out STD_LOGIC_VECTOR (5 downto 0));
 end processeur_8bits;
 
 architecture Behavioral of processeur_8bits is
@@ -138,5 +139,7 @@ begin
             data_in =>data_ut_to_mem
         );
 data_in <= data_ut_to_mem;
-data_out<= data_mem_to_reg;
+data_out <= data_mem_to_reg;
+address <= data_uc_to_mem;
+
 end Behavioral;
